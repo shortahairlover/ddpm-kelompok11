@@ -296,8 +296,8 @@ ddpm-kelompok11/
 - [ ] **T6.3** Grafik loss: MNIST, CIFAR-10 baseline, dan perbandingan E1–E5 dalam satu plot.
 - [ ] **T6.4** Grid per kelas final (10 × 8) untuk MNIST & CIFAR-10.
 - [ ] **T6.5** Grid efek guidance scale (w = 0 → 5).
-- [ ] **T6.6** `scripts/make_gif.py`: GIF proses denoising (noise → gambar) untuk beberapa kelas.
-- [ ] **T6.7** Grid progres kualitas sampel per epoch (bukti model makin baik).
+- [x] **T6.6** `scripts/make_gif.py`: GIF proses denoising (noise → gambar) untuk beberapa kelas.
+- [x] **T6.7** Grid progres kualitas sampel per epoch (bukti model makin baik).
 - [ ] **T6.8** *(Opsional)* Sampler DDIM 50–100 langkah + perbandingan waktu & kualitas dengan DDPM.
 
 **Output:** semua gambar di `reports/figures/`, tabel FID di `reports/eksperimen.md`.

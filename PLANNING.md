@@ -193,11 +193,11 @@ ddpm-kelompok11/
 - [x] **T1.1** Buat branch `fase-1-fondasi` dari `main` terbaru.
 - [x] **T1.2** Buat seluruh struktur folder sesuai Bagian F (file kosong/placeholder seperlunya).
 - [x] **T1.3** Tambahkan folder `audits/` untuk laporan audit tiap fase (Bagian I.3).
-- [ ] **T1.4** Tulis `CLAUDE.md`: ringkasan proyek, rujukan wajib ke `PLANNING.md`, aturan Bagian C–E dalam bentuk singkat. Ini berfungsi sebagai **system prompt awal** kelompok.
-- [ ] **T1.5** Tulis `README.md` awal: deskripsi, cara setup, cara menjalankan (diperbarui di akhir).
+- [x] **T1.4** Tulis `CLAUDE.md`: ringkasan proyek, rujukan wajib ke `PLANNING.md`, aturan Bagian C–E dalam bentuk singkat. Ini berfungsi sebagai **system prompt awal** kelompok.
+- [x] **T1.5** Tulis `README.md` awal: deskripsi, cara setup, cara menjalankan (diperbarui di akhir).
 - [x] **T1.6** Buat `src/utils.py`: `set_seed`, `get_device`, `load_config` (YAML → dict/namespace), `save_image_grid`, `make_run_dir` (`runs/<nama>_<timestamp>/` + salinan config).
 - [x] **T1.7** Buat `configs/mnist.yaml` dan `configs/cifar10.yaml` dengan nilai dari Bagian D.
-- [ ] **T1.8** Buat `logs/TEMPLATE_log_interaksi.md` sesuai template dosen.
+- [x] **T1.8** Buat `logs/TEMPLATE_log_interaksi.md` sesuai template dosen.
 - [x] **T1.9** `tests/test_utils.py`: `load_config` membaca kedua YAML, `set_seed` deterministik, `make_run_dir` membuat folder + salinan config.
 
 **Selesai kalau:** struktur repo lengkap, test utils lolos, `CLAUDE.md` merujuk ke `PLANNING.md`.

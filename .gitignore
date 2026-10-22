@@ -1,0 +1,19 @@
+# Lingkungan Python
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+.ruff_cache/
+.ipynb_checkpoints/
+
+# Data & hasil training (tidak di-commit)
+data/
+runs/
+*.pt
+*.pth
+
+# Editor / OS
+.vscode/
+.idea/
+Thumbs.db
+desktop.ini

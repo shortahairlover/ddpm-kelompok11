@@ -237,7 +237,7 @@ ddpm-kelompok11/
 - [x] **T3.10** `diffusion.py`: `p_sample` + `sample_loop` DDPM dengan CFG (`w`), clamp akhir ke [-1, 1], opsi menyimpan intermediate untuk GIF.
 - [x] **T3.11** `src/ema.py`: kelas EMA (update, copy ke model, state_dict).
 - [x] **T3.12** `tests/`: schedule (monoton, rentang benar), `q_sample` (t = 0 ≈ x0, t = T−1 ≈ noise), embedding (shape), U-Net (output shape = input shape untuk MNIST & CIFAR config).
-- [ ] **T3.13** **Tes overfit 1 batch**: 1 batch kecil, ratusan step → loss turun jauh. Simpan grafiknya.
+- [x] **T3.13** **Tes overfit 1 batch**: 1 batch kecil, ratusan step → loss turun jauh. Simpan grafiknya.
 
 **Selesai kalau:** semua test lolos dan tes overfit menunjukkan loss turun konsisten.
 

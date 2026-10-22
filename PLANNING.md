@@ -247,13 +247,13 @@ ddpm-kelompok11/
 **Tujuan:** pipeline training end-to-end terbukti benar pada dataset mudah.
 **Branch:** `fase-4-training-mnist`
 
-- [ ] **T4.1** `src/train.py`: argumen `--config`, `--device`, `--debug`, `--resume`, `--epochs` (override). Loop epoch/step dengan AdamW, AMP (GradScaler), grad clip, update EMA.
-- [ ] **T4.2** Logging loss per step & per epoch ke TensorBoard + `metrics.csv`, plus lr dan waktu per epoch.
-- [ ] **T4.3** Simpan checkpoint (model, EMA, optimizer, scaler, epoch, step) tiap N epoch + `last.pt`; `--resume` melanjutkan dengan benar.
-- [ ] **T4.4** Simpan grid sampel per kelas (10 kelas × N) dari model EMA tiap N epoch.
-- [ ] **T4.5** `src/sample.py`: muat checkpoint → generate grid per kelas, grid variasi guidance `w`, dan frame denoising untuk GIF.
-- [ ] **T4.6** `scripts/plot_metrics.py`: plot loss dari `metrics.csv` (satu atau beberapa run).
-- [ ] **T4.7** Uji `--debug` (beberapa step) termasuk uji `--resume`.
+- [x] **T4.1** `src/train.py`: argumen `--config`, `--device`, `--debug`, `--resume`, `--epochs` (override). Loop epoch/step dengan AdamW, AMP (GradScaler), grad clip, update EMA.
+- [x] **T4.2** Logging loss per step & per epoch ke TensorBoard + `metrics.csv`, plus lr dan waktu per epoch.
+- [x] **T4.3** Simpan checkpoint (model, EMA, optimizer, scaler, epoch, step) tiap N epoch + `last.pt`; `--resume` melanjutkan dengan benar.
+- [x] **T4.4** Simpan grid sampel per kelas (10 kelas × N) dari model EMA tiap N epoch.
+- [x] **T4.5** `src/sample.py`: muat checkpoint → generate grid per kelas, grid variasi guidance `w`, dan frame denoising untuk GIF.
+- [x] **T4.6** `scripts/plot_metrics.py`: plot loss dari `metrics.csv` (satu atau beberapa run).
+- [x] **T4.7** Uji `--debug` (beberapa step) termasuk uji `--resume`.
 - [ ] **T4.8** **Sanity run MNIST** penuh (±20 epoch) di background.
 - [ ] **T4.9** Evaluasi visual: angka terbaca dan sesuai label → simpan `reports/figures/mnist_grid_final.png` + grafik loss MNIST.
 

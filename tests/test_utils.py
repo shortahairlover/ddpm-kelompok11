@@ -67,6 +67,36 @@ def test_base_config_inheritance(tmp_path):
     assert "base" not in cfg
 
 
+EXPECTED_EXPERIMENTS = {
+    "e2_lr1e-4": ("train.lr", 1e-4),
+    "e3_lr4e-4": ("train.lr", 4e-4),
+    "e4_batch64": ("data.batch_size", 64),
+    "e5_cosine": ("diffusion.schedule", "cosine"),
+}
+
+
+@pytest.mark.parametrize("name", sorted(EXPECTED_EXPERIMENTS))
+def test_experiment_configs_change_only_one_thing(name):
+    base = load_config(CONFIGS[1]).to_dict()
+    exp = load_config(ROOT / "configs" / "experiments" / f"{name}.yaml").to_dict()
+    dotted, value = EXPECTED_EXPERIMENTS[name]
+    section, key = dotted.split(".")
+    assert exp["name"] == name
+    if isinstance(value, float):
+        assert exp[section][key] == pytest.approx(value)
+    else:
+        assert exp[section][key] == value
+    assert exp["train"]["epochs"] == 30
+    # selain nama, epoch, dan satu kunci yang diuji, semuanya sama dengan baseline
+    for sec in base:
+        if not isinstance(base[sec], dict):
+            continue
+        for k in base[sec]:
+            if (sec, k) in {(section, key), ("train", "epochs")}:
+                continue
+            assert exp[sec][k] == base[sec][k], f"{name}: {sec}.{k} berubah"
+
+
 def test_config_attribute_access_and_to_dict():
     cfg = Config({"a": {"b": 1}})
     assert cfg.a.b == 1

@@ -1,0 +1,7 @@
+# E4: batch size 64 (lr tetap 2e-4). Dibandingkan dengan E1 pada epoch 30.
+base: ../cifar10.yaml
+name: e4_batch64
+data:
+  batch_size: 64
+train:
+  epochs: 30

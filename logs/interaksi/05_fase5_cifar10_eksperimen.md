@@ -59,3 +59,12 @@
 ### 3. HASIL E1 (baseline, 100 epoch)
 - Loss 0,5590 → 0,0464 (ep 2) → 0,0334 (ep 10) → **0,0302 (ep 100)**; ±123 s/epoch; total ±3,8 jam.
 - Grid EMA w = 3 (`reports/figures/cifar10_e1_epoch100_w3.png`): setiap baris sesuai kelas CIFAR-10.
+
+### 4. HASIL EKSPERIMEN E2–E5, S1, S2
+- Rantai E2→E5 berjalan tanpa gangguan 19:52–00:42 (`semua eksperimen selesai`, exit 0).
+- Rata-rata loss epoch 26–30: E1 0,0315 · E2 0,0319 · E3 0,0313 · E4 0,0312 · E5 0,0583*.
+- **Temuan analisis:** loss E5 (cosine) ±2× lebih besar, tetapi itu **bukan berarti lebih buruk**: schedule berbeda → distribusi tingkat noise per timestep berbeda → skala MSE berbeda. Karena itu tabel diberi catatan dan perbandingan kualitas ditunda ke FID (Fase 6).
+- **Temuan reprodusibilitas:** grafik perbandingan sempat dibuat dengan memotong CSV E1 secara manual di folder sementara. Agar bisa direproduksi, `plot_metrics.py` ditambah opsi `--max-x` (+ test `test_read_curve_max_x`) dan grafik dibuat ulang dengan satu perintah.
+- **S1 (guidance):** w = 0 kelas acak; w = 1 sebagian besar sesuai; w = 3 jelas sesuai kelas; w = 5 paling sesuai tetapi warna jenuh & variasi berkurang (trade-off kualitas–keragaman CFG).
+- **S2 (EMA):** sampel EMA lebih halus dan bersih; non-EMA berisik dan banyak artefak.
+- Ringkasan lengkap: `reports/eksperimen.md`.

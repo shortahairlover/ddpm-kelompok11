@@ -21,8 +21,9 @@ matplotlib.use("Agg")
 import matplotlib.pyplot as plt  # noqa: E402
 
 
-def read_curve(run_dir: Path, source: str) -> tuple[list[float], list[float]]:
-    """Return (x, loss) dari metrics.csv (x = epoch) atau steps.csv (x = step)."""
+def read_curve(run_dir: Path, source: str, max_x: float | None = None
+               ) -> tuple[list[float], list[float]]:
+    """Return (x, loss) dari metrics.csv (x = epoch) atau steps.csv (x = step), x <= max_x."""
     fname, xkey, ykey = {
         "epochs": ("metrics.csv", "epoch", "train_loss"),
         "steps": ("steps.csv", "step", "loss"),
@@ -31,6 +32,8 @@ def read_curve(run_dir: Path, source: str) -> tuple[list[float], list[float]]:
         rows = list(csv.DictReader(f))
     if not rows:
         raise ValueError(f"{run_dir / fname} kosong")
+    if max_x is not None:
+        rows = [r for r in rows if float(r[xkey]) <= max_x]
     return [float(r[xkey]) for r in rows], [float(r[ykey]) for r in rows]
 
 
@@ -48,10 +51,11 @@ def moving_average(values: list[float], window: int) -> list[float]:
 
 
 def plot_runs(run_dirs: list[Path], labels: list[str], out: Path, source: str = "epochs",
-              smooth: int = 1, title: str | None = None, logy: bool = False) -> Path:
+              smooth: int = 1, title: str | None = None, logy: bool = False,
+              max_x: float | None = None) -> Path:
     fig, ax = plt.subplots(figsize=(7, 4))
     for run_dir, label in zip(run_dirs, labels, strict=True):
-        x, y = read_curve(run_dir, source)
+        x, y = read_curve(run_dir, source, max_x)
         ax.plot(x, moving_average(y, smooth), label=label, linewidth=1.5)
     ax.set_xlabel("epoch" if source == "epochs" else "step")
     ax.set_ylabel("train loss (MSE noise)")
@@ -76,11 +80,13 @@ def main(argv: list[str] | None = None) -> Path:
     parser.add_argument("--smooth", type=int, default=1)
     parser.add_argument("--title", type=str)
     parser.add_argument("--logy", action="store_true")
+    parser.add_argument("--max-x", type=float, help="batasi sumbu x (misal 30 epoch pertama)")
     args = parser.parse_args(argv)
     labels = args.labels or [r.name for r in args.runs]
     if len(labels) != len(args.runs):
         parser.error("jumlah --labels harus sama dengan jumlah run")
-    out = plot_runs(args.runs, labels, args.out, args.source, args.smooth, args.title, args.logy)
+    out = plot_runs(args.runs, labels, args.out, args.source, args.smooth, args.title, args.logy,
+                    args.max_x)
     print(f"grafik disimpan: {out}")
     return out
 

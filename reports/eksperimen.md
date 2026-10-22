@@ -35,17 +35,17 @@ Semua eksperimen memakai seed 42 dan sampling dengan seed yang sama (grid EMA, w
 
 | ID | Config | Step s/d ep 30 | Waktu 30 epoch | VRAM puncak | Loss ep 30 | Rata-rata loss ep 26–30 | FID (5k) | Catatan visual (ep 30) |
 |---|---|---|---|---|---|---|---|---|
-| E1 | lr 2e-4, batch 128, linear | 11.700 | ±62 menit | 3.698 MB | 0,0321 | 0,0315 | Fase 6 | Objek sesuai kelas, bentuk jelas |
-| E2 | **lr 1e-4** | 11.700 | ±63 menit | 3.698 MB | 0,0325 | 0,0319 | Fase 6 | Sangat mirip E1; loss turun paling lambat di awal (0,729 di ep 1) |
-| E3 | **lr 4e-4** | 11.700 | ±65 menit | 3.698 MB | 0,0320 | 0,0313 | Fase 6 | Sangat mirip E1; stabil (tidak ada NaN/lonjakan loss) |
-| E4 | **batch 64** | 23.430 | ±72 menit | 1.953 MB | 0,0310 | 0,0312 | Fase 6 | Sangat mirip E1; 2× jumlah update, VRAM ±separuh |
-| E5 | **cosine schedule** | 11.700 | ±63 menit | 3.698 MB | 0,0591 | 0,0583* | Fase 6 | Komposisi berbeda dari E1–E4 (lintasan noise berbeda), warna sedikit lebih pudar |
+| E1 | lr 2e-4, batch 128, linear | 11.700 | ±62 menit | 3.698 MB | 0,0321 | 0,0315 | 31,00 | Objek sesuai kelas, bentuk jelas |
+| E2 | **lr 1e-4** | 11.700 | ±63 menit | 3.698 MB | 0,0325 | 0,0319 | 34,08 | Sangat mirip E1; loss turun paling lambat di awal (0,729 di ep 1) |
+| E3 | **lr 4e-4** | 11.700 | ±65 menit | 3.698 MB | 0,0320 | 0,0313 | 35,00 | Sangat mirip E1; stabil (tidak ada NaN/lonjakan loss) |
+| E4 | **batch 64** | 23.430 | ±72 menit | 1.953 MB | 0,0310 | 0,0312 | **23,37** | Sangat mirip E1; 2× jumlah update, VRAM ±separuh |
+| E5 | **cosine schedule** | 11.700 | ±63 menit | 3.698 MB | 0,0591 | 0,0583* | 45,26 | Komposisi berbeda dari E1–E4 (lintasan noise berbeda), warna sedikit lebih pudar |
 
 \* Loss E5 **tidak sebanding** dengan E1–E4: schedule cosine menaruh lebih banyak timestep pada tingkat noise rendah–menengah sehingga rata-rata MSE prediksi noise per batch berbeda skalanya. Perbandingan kualitas yang adil memakai FID (Fase 6).
 
 Gambar: `reports/figures/cmp_experiments_epoch30.png`, `reports/figures/loss_cmp_experiments.png`.
 
-**Pengamatan sementara (sebelum FID):** pada rentang yang diuji, lr dan batch size hampir tidak mengubah loss akhir (selisih < 0,001) maupun tampilan sampel; perbedaan terbesar ada pada kecepatan turun di epoch awal (lr kecil paling lambat). **Checkpoint terbaik sementara: E1 epoch 100** (satu-satunya run 100 epoch; E2–E4 setara E1 di epoch 30). Dikonfirmasi dengan FID di Fase 6 (T6.2).
+**Pengamatan sementara (sebelum FID):** pada rentang yang diuji, lr dan batch size hampir tidak mengubah loss akhir (selisih < 0,001) maupun tampilan sampel; perbedaan terbesar ada pada kecepatan turun di epoch awal (lr kecil paling lambat). Checkpoint terbaik ditentukan dengan FID di bagian berikut.
 
 ## S1 — Efek guidance scale (T5.6)
 Checkpoint E1 epoch 100, EMA, seed sampling sama. Gambar: `reports/figures/s1_guidance_cifar10.png`.
@@ -64,3 +64,41 @@ Checkpoint E1 epoch 100, w = 3. Gambar: `reports/figures/s2_ema_vs_raw.png`.
 - **EMA (0,9999):** sampel lebih halus dan bersih, latar belakang konsisten.
 - **Non-EMA:** tekstur lebih berisik, lebih banyak artefak warna/bintik, beberapa objek kurang utuh.
 - Kesimpulan: EMA memperbaiki kualitas sampel secara nyata tanpa biaya training tambahan; semua hasil akhir memakai bobot EMA.
+
+## Hasil FID (T6.2, T6.8)
+Metode: `python -m src.evaluate` (lihat `scripts/run_fid.ps1`) — Inception-v3 2048 fitur (torchmetrics), gambar asli = 50.000 gambar train CIFAR-10 tanpa augmentasi, sampel = label seimbang (500 per kelas), bobot EMA, seed 0, sampler **DDIM 100 langkah (eta 0)**. FID 5.000 sampel bias ke atas dibanding FID 50k di paper, sehingga hanya dipakai untuk **membandingkan** eksperimen di proyek ini. Data mentah: `reports/fid_results.csv`.
+
+### Eksperimen pada epoch 30 (w = 3)
+| ID | Perubahan | FID ↓ | Peringkat |
+|---|---|---|---|
+| E4 | batch 64 | **23,37** | 1 |
+| E1 | baseline | 31,00 | 2 |
+| E2 | lr 1e-4 | 34,08 | 3 |
+| E3 | lr 4e-4 | 35,00 | 4 |
+| E5 | cosine schedule | 45,26 | 5 |
+
+Grafik: `reports/figures/fid_experiments_epoch30.png`.
+
+**Analisis:**
+- **E4 (batch 64) terbaik pada epoch yang sama**, tetapi E4 melakukan **2× jumlah update** (23.430 vs 11.700 step) dengan waktu ±16 % lebih lama. Pada jumlah update yang sama, keunggulannya belum tentu bertahan (E1 epoch 100 dengan 39.000 step mencapai FID 18,01 pada w = 3). Kesimpulan yang adil: dengan anggaran epoch yang sama, batch lebih kecil lebih efisien per epoch; batch 64 juga memakai VRAM ±separuh.
+- **lr 2e-4 (baseline) adalah titik tengah terbaik**: lr 1e-4 terlalu lambat belajar (FID 34,08), lr 4e-4 lebih berisik (FID 35,00) meskipun loss training-nya sedikit lebih kecil → **loss training yang lebih kecil tidak menjamin kualitas sampel lebih baik**.
+- **Cosine schedule paling buruk (45,26) pada 30 epoch**. Pada CIFAR-10 32×32 schedule linear yang dipakai DDPM asli sudah cocok; cosine terutama membantu resolusi tinggi / prediksi log-likelihood. Ini juga menegaskan bahwa loss E5 (0,058) memang tidak sebanding dengan loss schedule linear.
+
+### Efek guidance (E1 epoch 100)
+| w | 0 | 1 | **2** | 3 | 5 |
+|---|---|---|---|---|---|
+| FID ↓ | 26,52 | 22,70 | **16,43** | 18,01 | 26,30 |
+
+Grafik: `reports/figures/fid_guidance_e1.png`, gambar: `reports/figures/s1_guidance_cifar10.png`. Kurva berbentuk U: guidance kecil → kelas kurang tegas (sampel kurang mirip data asli per kelas); guidance besar → warna jenuh dan variasi berkurang (*trade-off* kualitas–keragaman classifier-free guidance). **w = 2 terbaik** sehingga `sample.guidance_scale` di `configs/cifar10.yaml` diubah dari 3,0 ke **2,0** (dicatat di Bagian H `PLANNING.md`).
+
+### DDIM-100 vs DDPM-1000 (E1 epoch 100, w = 3, 2.000 sampel)
+| Sampler | Langkah | FID ↓ | Waktu 2.000 sampel |
+|---|---|---|---|
+| DDIM (eta 0) | 100 | 26,23 | 8,9 menit |
+| DDPM | 1000 | 26,64 | 85,7 menit |
+
+FID praktis sama (selisih 0,41, dalam variasi sampling) dengan DDIM **±10× lebih cepat** → pemakaian DDIM-100 untuk evaluasi FID valid. (FID 2.000 sampel lebih tinggi dari 5.000 sampel karena bias jumlah sampel, bukan karena modelnya.)
+
+## Kesimpulan akhir
+- **Model terbaik: E1 epoch 100, EMA, guidance w = 2 → FID 16,43** (DDIM-100, 5.000 sampel). Checkpoint: `runs/e1_baseline_20261022-160411/checkpoints/epoch_100.pt`.
+- Grid final: `reports/figures/cifar10_final_w2.png` (CIFAR-10), `reports/figures/mnist_grid_final.png` (MNIST).

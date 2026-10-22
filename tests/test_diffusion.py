@@ -208,3 +208,46 @@ def test_ema_state_dict_roundtrip():
 def test_ema_rejects_invalid_decay():
     with pytest.raises(ValueError):
         EMA(nn.Linear(2, 2), decay=1.0)
+
+
+# ---------------------------------------------------------------- DDIM
+class _LinearModel(nn.Module):
+    """Model palsu yang bergantung pada x, t, dan y agar perbandingan sampler bermakna."""
+
+    def forward(self, x, t, y):
+        return 0.3 * x + 0.01 * t.float().reshape(-1, 1, 1, 1) / 20 + 0.05 * y.float().reshape(
+            -1, 1, 1, 1
+        )
+
+
+def test_ddim_eta1_full_steps_equals_ddpm():
+    """eta = 1 dan steps = T: DDIM harus identik dengan DDPM (mean & varians posterior sama)."""
+    cfg = _cfg("mnist", "diffusion.timesteps=20")
+    diffusion = Diffusion.from_config(cfg)
+    model = _LinearModel()
+    y = torch.tensor([0, 3, 7])
+    shape = (3, 1, 8, 8)
+    ddpm, _ = diffusion.sample(model, y, shape, guidance_scale=2.0,
+                               generator=torch.Generator().manual_seed(5))
+    ddim = diffusion.ddim_sample(model, y, shape, steps=20, eta=1.0, guidance_scale=2.0,
+                                 generator=torch.Generator().manual_seed(5))
+    assert torch.allclose(ddpm, ddim, atol=1e-4)
+
+
+def test_ddim_eta0_deterministic_and_shape():
+    cfg = _cfg("mnist", "diffusion.timesteps=50")
+    diffusion = Diffusion.from_config(cfg)
+    model = _LinearModel()
+    y = torch.arange(4)
+    a = diffusion.ddim_sample(model, y, (4, 1, 8, 8), steps=10,
+                              generator=torch.Generator().manual_seed(1))
+    b = diffusion.ddim_sample(model, y, (4, 1, 8, 8), steps=10,
+                              generator=torch.Generator().manual_seed(1))
+    assert a.shape == (4, 1, 8, 8) and torch.equal(a, b)
+    assert a.min() >= -1 and a.max() <= 1
+
+
+def test_ddim_invalid_steps():
+    diffusion = Diffusion.from_config(_cfg("mnist", "diffusion.timesteps=10"))
+    with pytest.raises(ValueError):
+        diffusion.ddim_sample(_LinearModel(), torch.arange(2), (2, 1, 4, 4), steps=11)

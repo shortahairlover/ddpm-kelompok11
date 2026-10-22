@@ -1,0 +1,20 @@
+[project]
+name = "ddpm-kelompok11"
+version = "0.1.0"
+description = "Mini DDPM class-conditional (MNIST & CIFAR-10) from scratch"
+requires-python = ">=3.11"
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+extend-exclude = [".venv", "data", "runs"]
+
+[tool.ruff.lint]
+# E/W: gaya dasar, F: pyflakes (variabel/impor tak terpakai, nama tak terdefinisi),
+# B: bugbear (pola rawan bug), I: urutan impor
+select = ["E", "W", "F", "B", "I"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"
+markers = ["slow: test yang butuh waktu lama (misal overfit 1 batch)"]

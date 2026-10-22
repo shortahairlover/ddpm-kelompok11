@@ -165,21 +165,21 @@ ddpm-kelompok11/
 - [x] **T0.1** Cek ulang hardware & tools (`nvidia-smi`, `py -0`, `git --version`, `winget --version`) dan perbarui Bagian B kalau ada yang berubah.
 - [x] **T0.2** Pastikan github.com bisa diakses (`Test-NetConnection github.com -Port 443`). Kalau gagal → kondisi berhenti (Bagian I.4); kelompok memperbaiki jaringan (ganti Wi-Fi/hotspot, cek firewall/antivirus/DNS).
 - [x] **T0.3** Install GitHub CLI: `winget install --id GitHub.cli -e`.
-- [ ] **T0.4** Kelompok menjalankan `gh auth login` (GitHub.com → HTTPS → login via browser). Claude memverifikasi dengan `gh auth status` dan menjalankan `gh auth setup-git`.
+- [x] **T0.4** Kelompok menjalankan `gh auth login` (GitHub.com → HTTPS → login via browser). Claude memverifikasi dengan `gh auth status` dan menjalankan `gh auth setup-git`.
 - [x] **T0.5** Identitas Git (`git config --global user.name` / `user.email`) diisi sesuai data dari kelompok.
 
 *Repo:*
 - [x] **T0.6** Buat folder `ddpm-kelompok11/`, `git init -b main`, buat `.gitignore` (`.venv/`, `data/`, `runs/`, `*.pt`, `__pycache__/`, `.ipynb_checkpoints/`, `.pytest_cache/`, `.ruff_cache/`).
 - [x] **T0.7** Salin dokumen ini ke `ddpm-kelompok11/PLANNING.md` (mulai titik ini, file itulah yang diperbarui) + `README.md` singkat → commit awal di `main`.
-- [ ] **T0.8** Buat repo GitHub private: `gh repo create ddpm-kelompok11 --private --source . --remote origin --push`. Verifikasi repo terlihat di `gh repo view`.
-- [ ] **T0.9** Buat branch `fase-0-persiapan-tools` dari `main`.
+- [x] **T0.8** Buat repo GitHub private: `gh repo create ddpm-kelompok11 --private --source . --remote origin --push`. Verifikasi repo terlihat di `gh repo view`.
+- [x] **T0.9** Buat branch `fase-0-persiapan-tools` dari `main`.
 
 *Lingkungan Python:*
-- [ ] **T0.10** Buat virtual environment Python 3.11 di repo: `py -3.11 -m venv .venv`, lalu upgrade `pip`.
-- [ ] **T0.11** Install PyTorch + torchvision **versi CUDA** sesuai perintah resmi di pytorch.org (pilih build CUDA yang didukung driver 617.42).
-- [ ] **T0.12** Install library pendukung: `numpy matplotlib tqdm pyyaml pillow imageio tensorboard "torchmetrics[image]" torch-fidelity pytest ruff`. Simpan `requirements.txt` (versi dipin).
-- [ ] **T0.13** Buat `scripts/check_env.py`: print versi Python/PyTorch/CUDA, nama GPU, VRAM, dan uji perkalian matriks + AMP di GPU.
-- [ ] **T0.14** Tambahkan konfigurasi `ruff` minimal (`pyproject.toml`) untuk audit.
+- [x] **T0.10** Buat virtual environment Python 3.11 di repo: `py -3.11 -m venv .venv`, lalu upgrade `pip`.
+- [x] **T0.11** Install PyTorch + torchvision **versi CUDA** sesuai perintah resmi di pytorch.org (pilih build CUDA yang didukung driver 617.42).
+- [x] **T0.12** Install library pendukung: `numpy matplotlib tqdm pyyaml pillow imageio tensorboard "torchmetrics[image]" torch-fidelity pytest ruff`. Simpan `requirements.txt` (versi dipin).
+- [x] **T0.13** Buat `scripts/check_env.py`: print versi Python/PyTorch/CUDA, nama GPU, VRAM, dan uji perkalian matriks + AMP di GPU.
+- [x] **T0.14** Tambahkan konfigurasi `ruff` minimal (`pyproject.toml`) untuk audit.
 
 **Output:** repo GitHub `ddpm-kelompok11`, `.venv/`, `requirements.txt`, `pyproject.toml`, `scripts/check_env.py`.
 **Selesai kalau:** `gh auth status` OK, repo ada di GitHub, `python scripts/check_env.py` menampilkan `cuda available: True` + nama RTX 4050 + uji GPU lolos, lalu audit Fase 0 lolos dan branch sudah di-push & di-merge (Bagian I).

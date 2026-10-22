@@ -44,3 +44,18 @@
 
 **Pemantauan E1 (epoch awal)**
 - `epoch 1/100 | loss 0.5590 | 142.9s` (termasuk warmup lr & inisialisasi cuDNN), `epoch 2/100 | loss 0.0464 | 122.8s`, VRAM puncak 3.697 MB, GPU 100 %, suhu 72 °C → training stabil, tidak ada NaN.
+
+**Bug 3 — Skrip `run_experiments.ps1` (Windows PowerShell 5.1)**
+- **Gejala:** log konsol E2 tersimpan sebagai UTF-16 (terbaca `2 0 2 6 - 1 0 - 2 2 ...` saat dibaca alat lain).
+- **Analisis:** redirect `*>` di PowerShell 5.1 menulis UTF-16. Saat menelusuri, ditemukan risiko yang lebih serius: dengan `$ErrorActionPreference = "Stop"`, satu baris stderr dari Python (misal warning library) akan diubah menjadi `NativeCommandError` dan **menghentikan seluruh rantai eksperimen**. Dicek: log E1 & MNIST tidak berisi baris non-INFO (`grep -vc "| INFO |"` → 0), sehingga run E2 yang sudah berjalan aman.
+- **Solusi:** `$ErrorActionPreference = "Continue"` + keberhasilan dicek lewat `$LASTEXITCODE`, output ditulis dengan `2>&1 | Out-File -Encoding utf8`. Diuji tanpa GPU dengan nama eksperimen fiktif:
+  ```
+  GAGAL: tidak_ada (exit 1), lihat ...\tidak_ada_console.log
+  tidak_ada_console.log: Unicode text, UTF-8 (with BOM) text
+  FileNotFoundError: [Errno 2] No such file or directory: 'configs\experiments\tidak_ada.yaml'
+  ```
+- **Pelajaran:** perilaku shell berbeda antar versi; skrip otomasi harus dites jalur gagalnya, bukan hanya jalur sukses.
+
+### 3. HASIL E1 (baseline, 100 epoch)
+- Loss 0,5590 → 0,0464 (ep 2) → 0,0334 (ep 10) → **0,0302 (ep 100)**; ±123 s/epoch; total ±3,8 jam.
+- Grid EMA w = 3 (`reports/figures/cifar10_e1_epoch100_w3.png`): setiap baris sesuai kelas CIFAR-10.

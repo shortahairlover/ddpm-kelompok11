@@ -254,8 +254,8 @@ ddpm-kelompok11/
 - [x] **T4.5** `src/sample.py`: muat checkpoint → generate grid per kelas, grid variasi guidance `w`, dan frame denoising untuk GIF.
 - [x] **T4.6** `scripts/plot_metrics.py`: plot loss dari `metrics.csv` (satu atau beberapa run).
 - [x] **T4.7** Uji `--debug` (beberapa step) termasuk uji `--resume`.
-- [ ] **T4.8** **Sanity run MNIST** penuh (±20 epoch) di background.
-- [ ] **T4.9** Evaluasi visual: angka terbaca dan sesuai label → simpan `reports/figures/mnist_grid_final.png` + grafik loss MNIST.
+- [x] **T4.8** **Sanity run MNIST** penuh (±20 epoch) di background.
+- [x] **T4.9** Evaluasi visual: angka terbaca dan sesuai label → simpan `reports/figures/mnist_grid_final.png` + grafik loss MNIST.
 
 **Selesai kalau:** angka 0–9 hasil generate terbaca jelas dan sesuai label yang diminta.
 

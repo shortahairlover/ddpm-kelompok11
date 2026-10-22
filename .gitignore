@@ -17,3 +17,6 @@ runs/
 .idea/
 Thumbs.db
 desktop.ini
+
+# Log konsol run di background
+*_console.log

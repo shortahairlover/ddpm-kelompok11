@@ -175,11 +175,11 @@ ddpm-kelompok11/
 - [ ] **T0.9** Buat branch `fase-0-persiapan-tools` dari `main`.
 
 *Lingkungan Python:*
-- [ ] **T0.10** Buat virtual environment Python 3.11 di repo: `py -3.11 -m venv .venv`, lalu upgrade `pip`.
-- [ ] **T0.11** Install PyTorch + torchvision **versi CUDA** sesuai perintah resmi di pytorch.org (pilih build CUDA yang didukung driver 617.42).
-- [ ] **T0.12** Install library pendukung: `numpy matplotlib tqdm pyyaml pillow imageio tensorboard "torchmetrics[image]" torch-fidelity pytest ruff`. Simpan `requirements.txt` (versi dipin).
-- [ ] **T0.13** Buat `scripts/check_env.py`: print versi Python/PyTorch/CUDA, nama GPU, VRAM, dan uji perkalian matriks + AMP di GPU.
-- [ ] **T0.14** Tambahkan konfigurasi `ruff` minimal (`pyproject.toml`) untuk audit.
+- [x] **T0.10** Buat virtual environment Python 3.11 di repo: `py -3.11 -m venv .venv`, lalu upgrade `pip`.
+- [x] **T0.11** Install PyTorch + torchvision **versi CUDA** sesuai perintah resmi di pytorch.org (pilih build CUDA yang didukung driver 617.42).
+- [x] **T0.12** Install library pendukung: `numpy matplotlib tqdm pyyaml pillow imageio tensorboard "torchmetrics[image]" torch-fidelity pytest ruff`. Simpan `requirements.txt` (versi dipin).
+- [x] **T0.13** Buat `scripts/check_env.py`: print versi Python/PyTorch/CUDA, nama GPU, VRAM, dan uji perkalian matriks + AMP di GPU.
+- [x] **T0.14** Tambahkan konfigurasi `ruff` minimal (`pyproject.toml`) untuk audit.
 
 **Output:** repo GitHub `ddpm-kelompok11`, `.venv/`, `requirements.txt`, `pyproject.toml`, `scripts/check_env.py`.
 **Selesai kalau:** `gh auth status` OK, repo ada di GitHub, `python scripts/check_env.py` menampilkan `cuda available: True` + nama RTX 4050 + uji GPU lolos, lalu audit Fase 0 lolos dan branch sudah di-push & di-merge (Bagian I).

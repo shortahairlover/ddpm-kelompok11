@@ -1,0 +1,7 @@
+# E5: cosine noise schedule (Nichol & Dhariwal, 2021). Dibandingkan dengan E1 pada epoch 30.
+base: ../cifar10.yaml
+name: e5_cosine
+diffusion:
+  schedule: cosine
+train:
+  epochs: 30

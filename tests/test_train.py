@@ -70,3 +70,13 @@ def test_debug_train_resume_sample_plot(tmp_path):
     # plot kurva loss
     out = plot_runs([run_dir], ["debug"], tmp_path / "loss.png", source="steps", smooth=2)
     assert out.exists()
+
+
+def test_read_curve_max_x(tmp_path):
+    from scripts.plot_metrics import read_curve
+
+    (tmp_path / "metrics.csv").write_text(
+        "epoch,step,train_loss\n1,10,0.5\n2,20,0.4\n3,30,0.3\n", encoding="utf8"
+    )
+    x, y = read_curve(tmp_path, "epochs", max_x=2)
+    assert x == [1.0, 2.0] and y == [0.5, 0.4]

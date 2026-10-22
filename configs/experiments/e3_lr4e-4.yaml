@@ -1,0 +1,6 @@
+# E3: learning rate lebih besar (4e-4). Dibandingkan dengan E1 pada epoch 30.
+base: ../cifar10.yaml
+name: e3_lr4e-4
+train:
+  epochs: 30
+  lr: 4.0e-4

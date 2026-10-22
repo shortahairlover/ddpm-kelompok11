@@ -265,10 +265,10 @@ ddpm-kelompok11/
 **Tujuan:** model utama terlatih dan ada bukti eksperimen tuning.
 **Branch:** `fase-5-cifar10-eksperimen`
 
-- [ ] **T5.1** Uji cepat CIFAR-10 `--debug`: cek VRAM dan kecepatan per step. Sesuaikan batch kalau OOM, dan catat di Bagian H.
-- [ ] **T5.2** Estimasi lama training dari kecepatan step dan catat di `reports/eksperimen.md`. Kalau estimasi E1 > 8 jam, kurangi epoch E1 secukupnya dan catat di Bagian H.
-- [ ] **T5.3** **E1 Baseline** (konfigurasi Bagian D, target 100+ epoch) di background dengan checkpoint berkala.
-- [ ] **T5.4** Buat config eksperimen di `configs/experiments/`:
+- [x] **T5.1** Uji cepat CIFAR-10 `--debug`: cek VRAM dan kecepatan per step. Sesuaikan batch kalau OOM, dan catat di Bagian H.
+- [x] **T5.2** Estimasi lama training dari kecepatan step dan catat di `reports/eksperimen.md`. Kalau estimasi E1 > 8 jam, kurangi epoch E1 secukupnya dan catat di Bagian H.
+- [x] **T5.3** **E1 Baseline** (konfigurasi Bagian D, target 100+ epoch) di background dengan checkpoint berkala.
+- [x] **T5.4** Buat config eksperimen di `configs/experiments/`:
 
   | ID | Perubahan dari baseline |
   |---|---|
@@ -278,10 +278,10 @@ ddpm-kelompok11/
   | E5 | cosine schedule |
 
   E2–E5 dijalankan lebih pendek (misal 30 epoch) lalu dibandingkan dengan E1 pada epoch yang sama.
-- [ ] **T5.5** Jalankan E2–E5 satu per satu (setelah E1 selesai, karena VRAM hanya cukup untuk satu run).
-- [ ] **T5.6** **S1** (tanpa training ulang): sampling dengan guidance w = 0, 1, 3, 5 dari checkpoint terbaik.
-- [ ] **T5.7** **S2** (tanpa training ulang): bandingkan sampel model EMA vs non-EMA.
-- [ ] **T5.8** Isi `reports/eksperimen.md`: config, lama training, loss akhir, FID (dari Fase 6), dan catatan visual tiap eksperimen.
+- [x] **T5.5** Jalankan E2–E5 satu per satu (setelah E1 selesai, karena VRAM hanya cukup untuk satu run).
+- [x] **T5.6** **S1** (tanpa training ulang): sampling dengan guidance w = 0, 1, 3, 5 dari checkpoint terbaik.
+- [x] **T5.7** **S2** (tanpa training ulang): bandingkan sampel model EMA vs non-EMA.
+- [x] **T5.8** Isi `reports/eksperimen.md`: config, lama training, loss akhir, FID (dari Fase 6), dan catatan visual tiap eksperimen.
 
 **Selesai kalau:** E1 selesai, E2–E5 + S1 + S2 terdokumentasi, checkpoint terbaik ditentukan.
 
@@ -376,6 +376,7 @@ ddpm-kelompok11/
 | 22/10/2026 | Proyek dijalankan tanpa berhenti dari Fase 0 sampai Fase 8 (Bagian I); debugging langsung oleh Claude | Arahan kelompok |
 | 22/10/2026 | GitHub sempat tidak bisa diakses (timeout 443), lalu bisa diakses saat Fase 0 dimulai | Hasil pengecekan |
 | 22/10/2026 | PyTorch 2.14.1 + torchvision 0.29.1 build CUDA 13.0 | Versi stabil terbaru; driver mendukung CUDA 13.4 |
+| 23/10/2026 | Checkpoint terbaik sementara = E1 epoch 100; dikonfirmasi dengan FID di T6.2 | Kriteria Fase 5 meminta checkpoint terbaik, sedangkan FID baru dihitung di Fase 6. E1 satu-satunya run 100 epoch; E2–E4 setara E1 pada epoch 30 secara loss & visual |
 
 ---
 

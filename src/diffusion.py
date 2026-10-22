@@ -136,3 +136,43 @@ class Diffusion:
             if progress is not None:
                 progress(i)
         return x.clamp(-1.0, 1.0), frames
+
+    @torch.no_grad()
+    def ddim_sample(
+        self,
+        model: nn.Module,
+        y: torch.Tensor,
+        shape: Sequence[int],
+        steps: int = 100,
+        eta: float = 0.0,
+        guidance_scale: float = 1.0,
+        generator: torch.Generator | None = None,
+    ) -> torch.Tensor:
+        """Sampling DDIM (Song et al., 2021) dengan `steps` langkah (subset timestep).
+
+        Untuk setiap pasangan (t, t_prev) pada subset menurun:
+            x0_hat = (x_t - sqrt(1 - a_t) eps) / sqrt(a_t)            (di-clamp ke [-1, 1])
+            sigma  = eta * sqrt((1 - a_prev)/(1 - a_t)) * sqrt(1 - a_t/a_prev)
+            x_prev = sqrt(a_prev) x0_hat + sqrt(1 - a_prev - sigma^2) eps + sigma z
+        eta = 0 -> deterministik; eta = 1 dan steps = T -> setara DDPM (varians posterior).
+        Model yang sama dipakai tanpa training ulang. Return (B, C, H, W) di [-1, 1].
+        """
+        if not 1 <= steps <= self.timesteps:
+            raise ValueError(f"steps harus di [1, {self.timesteps}]")
+        device = y.device
+        a_bar = self.schedule.alphas_cumprod
+        ts = torch.linspace(self.timesteps - 1, 0, steps, device=device).round().long()
+        x = torch.randn(tuple(shape), device=device, generator=generator)
+        for i in range(steps):
+            t = ts[i]
+            a_t = a_bar[t]
+            a_prev = a_bar[ts[i + 1]] if i + 1 < steps else torch.ones((), device=device)
+            t_batch = torch.full((shape[0],), int(t), device=device, dtype=torch.long)
+            eps = self.predict_eps(model, x, t_batch, y, guidance_scale)
+            x0_hat = ((x - (1 - a_t).sqrt() * eps) / a_t.sqrt()).clamp(-1.0, 1.0)
+            eps = (x - a_t.sqrt() * x0_hat) / (1 - a_t).sqrt()  # konsisten dengan x0 ter-clamp
+            sigma = eta * ((1 - a_prev) / (1 - a_t)).sqrt() * (1 - a_t / a_prev).sqrt()
+            noise = torch.randn(x.shape, device=device, generator=generator)
+            x = a_prev.sqrt() * x0_hat + (1 - a_prev - sigma**2).clamp(min=0).sqrt() * eps \
+                + sigma * noise
+        return x.clamp(-1.0, 1.0)

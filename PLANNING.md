@@ -291,7 +291,7 @@ ddpm-kelompok11/
 **Tujuan:** bukti kuantitatif & visual yang valid untuk laporan dan presentasi.
 **Branch:** `fase-6-evaluasi`
 
-- [ ] **T6.1** `src/evaluate.py`: FID dengan `torchmetrics` (5.000 sampel generate vs gambar asli CIFAR-10). Catat bahwa FID 5k hanya untuk perbandingan antar eksperimen.
+- [x] **T6.1** `src/evaluate.py`: FID dengan `torchmetrics` (5.000 sampel generate vs gambar asli CIFAR-10). Catat bahwa FID 5k hanya untuk perbandingan antar eksperimen.
 - [ ] **T6.2** Hitung FID untuk E1–E5 (checkpoint pada epoch yang sama) dan untuk guidance w terbaik.
 - [ ] **T6.3** Grafik loss: MNIST, CIFAR-10 baseline, dan perbandingan E1–E5 dalam satu plot.
 - [ ] **T6.4** Grid per kelas final (10 × 8) untuk MNIST & CIFAR-10.
@@ -377,6 +377,7 @@ ddpm-kelompok11/
 | 22/10/2026 | GitHub sempat tidak bisa diakses (timeout 443), lalu bisa diakses saat Fase 0 dimulai | Hasil pengecekan |
 | 22/10/2026 | PyTorch 2.14.1 + torchvision 0.29.1 build CUDA 13.0 | Versi stabil terbaru; driver mendukung CUDA 13.4 |
 | 23/10/2026 | Checkpoint terbaik sementara = E1 epoch 100; dikonfirmasi dengan FID di T6.2 | Kriteria Fase 5 meminta checkpoint terbaik, sedangkan FID baru dihitung di Fase 6. E1 satu-satunya run 100 epoch; E2–E4 setara E1 pada epoch 30 secara loss & visual |
+| 23/10/2026 | FID dihitung dengan sampler **DDIM 100 langkah** (eta 0), 5.000 sampel, real = 50.000 gambar train CIFAR-10; pembanding DDPM-1000 vs DDIM-100 pada 2.000 sampel | DDPM-1000 untuk 5.000 sampel ±2,3 jam per evaluasi (±20 jam untuk semua evaluasi). DDIM dipakai tanpa training ulang; kesetaraannya dengan DDPM diuji (`test_ddim_eta1_full_steps_equals_ddpm`) |
 
 ---
 

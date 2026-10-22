@@ -267,7 +267,7 @@ ddpm-kelompok11/
 
 - [x] **T5.1** Uji cepat CIFAR-10 `--debug`: cek VRAM dan kecepatan per step. Sesuaikan batch kalau OOM, dan catat di Bagian H.
 - [x] **T5.2** Estimasi lama training dari kecepatan step dan catat di `reports/eksperimen.md`. Kalau estimasi E1 > 8 jam, kurangi epoch E1 secukupnya dan catat di Bagian H.
-- [ ] **T5.3** **E1 Baseline** (konfigurasi Bagian D, target 100+ epoch) di background dengan checkpoint berkala.
+- [x] **T5.3** **E1 Baseline** (konfigurasi Bagian D, target 100+ epoch) di background dengan checkpoint berkala.
 - [x] **T5.4** Buat config eksperimen di `configs/experiments/`:
 
   | ID | Perubahan dari baseline |

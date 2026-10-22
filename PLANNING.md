@@ -172,7 +172,7 @@ ddpm-kelompok11/
 - [x] **T0.6** Buat folder `ddpm-kelompok11/`, `git init -b main`, buat `.gitignore` (`.venv/`, `data/`, `runs/`, `*.pt`, `__pycache__/`, `.ipynb_checkpoints/`, `.pytest_cache/`, `.ruff_cache/`).
 - [x] **T0.7** Salin dokumen ini ke `ddpm-kelompok11/PLANNING.md` (mulai titik ini, file itulah yang diperbarui) + `README.md` singkat → commit awal di `main`.
 - [ ] **T0.8** Buat repo GitHub private: `gh repo create ddpm-kelompok11 --private --source . --remote origin --push`. Verifikasi repo terlihat di `gh repo view`.
-- [ ] **T0.9** Buat branch `fase-0-persiapan-tools` dari `main`.
+- [x] **T0.9** Buat branch `fase-0-persiapan-tools` dari `main`.
 
 *Lingkungan Python:*
 - [x] **T0.10** Buat virtual environment Python 3.11 di repo: `py -3.11 -m venv .venv`, lalu upgrade `pip`.

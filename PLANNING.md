@@ -313,7 +313,7 @@ ddpm-kelompok11/
 - [x] **T7.3** Ekspor transkrip sesi Claude ke `logs/raw/` di akhir setiap sesi kerja.
 - [x] **T7.4** `logs/README.md`: indeks kronologis semua log (inisiasi → error → optimasi).
 - [x] **T7.5** Perbarui `README.md` final: setup, cara training, sampling, evaluasi, contoh hasil.
-- [ ] **T7.6** `reports/laporan_akhir.md` (lalu ekspor ke PDF), berisi:
+- [x] **T7.6** `reports/laporan_akhir.md` (lalu ekspor ke PDF), berisi:
   1. Pendahuluan & tujuan
   2. Teori singkat DDPM (forward/reverse, prediksi noise, CFG)
   3. Metodologi vibe coding & isi `CLAUDE.md`

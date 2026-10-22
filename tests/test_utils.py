@@ -106,3 +106,16 @@ def test_save_image_grid(tmp_path):
     out = tmp_path / "sub" / "grid.png"
     save_image_grid(images, out, nrow=4)
     assert out.exists() and out.stat().st_size > 0
+
+
+def test_config_pickle_and_deepcopy_roundtrip():
+    """Config harus bisa di-pickle (DataLoader worker di Windows memakai spawn) & di-deepcopy."""
+    import copy
+    import pickle
+
+    cfg = load_config(CONFIGS[1])
+    restored = pickle.loads(pickle.dumps(cfg))
+    assert restored == cfg and isinstance(restored.train, Config)
+    clone = copy.deepcopy(cfg)
+    clone.train.lr = 9.0
+    assert cfg.train.lr == pytest.approx(2e-4)

@@ -53,3 +53,8 @@
   ```
 - **Analisis & Solusi:** baris `print` terlalu panjang setelah perubahan. Diperbaiki dengan memecah string ke variabel `os_info`. `ruff check .` → `All checks passed!`.
 - **Pelajaran:** jalankan lint setiap kali mengubah kode, bukan hanya di akhir, supaya audit fase tidak menemukan sisa pelanggaran.
+
+**Kendala 3 — Login GitHub CLI belum tersimpan**
+- **Gejala:** browser sudah menampilkan *"Congratulations, you're all set!"*, tetapi `gh auth status` masih `You are not logged into any GitHub hosts`.
+- **Analisis & Solusi:** pada alur `gh auth login --web`, gh baru mulai *polling* token setelah Enter ditekan di terminal. Setelah Enter ditekan, terminal menampilkan `✓ Logged in as shortahairlover`. Dilanjutkan `gh auth setup-git` agar `git push` memakai kredensial gh, lalu repo private dibuat dengan `gh repo create ddpm-kelompok11 --private --source . --remote origin`.
+- **Pelajaran:** login GitHub selalu dilakukan oleh anggota kelompok sendiri; Claude hanya memverifikasi hasilnya.

@@ -165,13 +165,13 @@ ddpm-kelompok11/
 - [x] **T0.1** Cek ulang hardware & tools (`nvidia-smi`, `py -0`, `git --version`, `winget --version`) dan perbarui Bagian B kalau ada yang berubah.
 - [x] **T0.2** Pastikan github.com bisa diakses (`Test-NetConnection github.com -Port 443`). Kalau gagal → kondisi berhenti (Bagian I.4); kelompok memperbaiki jaringan (ganti Wi-Fi/hotspot, cek firewall/antivirus/DNS).
 - [x] **T0.3** Install GitHub CLI: `winget install --id GitHub.cli -e`.
-- [ ] **T0.4** Kelompok menjalankan `gh auth login` (GitHub.com → HTTPS → login via browser). Claude memverifikasi dengan `gh auth status` dan menjalankan `gh auth setup-git`.
+- [x] **T0.4** Kelompok menjalankan `gh auth login` (GitHub.com → HTTPS → login via browser). Claude memverifikasi dengan `gh auth status` dan menjalankan `gh auth setup-git`.
 - [x] **T0.5** Identitas Git (`git config --global user.name` / `user.email`) diisi sesuai data dari kelompok.
 
 *Repo:*
 - [x] **T0.6** Buat folder `ddpm-kelompok11/`, `git init -b main`, buat `.gitignore` (`.venv/`, `data/`, `runs/`, `*.pt`, `__pycache__/`, `.ipynb_checkpoints/`, `.pytest_cache/`, `.ruff_cache/`).
 - [x] **T0.7** Salin dokumen ini ke `ddpm-kelompok11/PLANNING.md` (mulai titik ini, file itulah yang diperbarui) + `README.md` singkat → commit awal di `main`.
-- [ ] **T0.8** Buat repo GitHub private: `gh repo create ddpm-kelompok11 --private --source . --remote origin --push`. Verifikasi repo terlihat di `gh repo view`.
+- [x] **T0.8** Buat repo GitHub private: `gh repo create ddpm-kelompok11 --private --source . --remote origin --push`. Verifikasi repo terlihat di `gh repo view`.
 - [x] **T0.9** Buat branch `fase-0-persiapan-tools` dari `main`.
 
 *Lingkungan Python:*

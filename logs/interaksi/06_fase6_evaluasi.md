@@ -48,3 +48,12 @@
 - **Gejala:** baris FID pertama menyimpan `D:/Files Mata Kuliah/.../runs/e1_baseline_.../epoch_030.pt` (tidak portabel, membocorkan struktur folder pribadi ke repo).
 - **Solusi:** fungsi `display_path` (path relatif terhadap root repo) + `tests/test_evaluate.py`. Perubahan dibuat kecil dan diuji di CPU karena tahap rantai FID berikutnya memuat ulang `src/evaluate.py`. Baris dari tahap yang sudah berjalan dinormalkan setelah rantai selesai.
 - **Hasil FID pertama:** E1 epoch 30, w = 3, DDIM-100, 5.000 sampel → **FID 31,00** (22,4 menit; statistik 50.000 gambar asli ±12 menit).
+
+### 3. TAHAP OPTIMASI / HASIL EVALUASI
+- Rantai `scripts/run_fid.ps1` selesai 01:03–06:40 tanpa error (12 nilai FID di `reports/fid_results.csv`; path absolut tahap pertama dinormalkan menjadi relatif).
+- **Eksperimen epoch 30 (w = 3):** E4 batch 64 **23,37** < E1 31,00 < E2 34,08 < E3 35,00 < E5 cosine 45,26.
+  - Analisis kelompok: E4 unggul per epoch karena melakukan 2× jumlah update; lr baseline 2e-4 berada di titik tengah terbaik; loss training lebih kecil (E3) tidak menjamin FID lebih baik; cosine kalah pada CIFAR-10 32×32.
+- **Guidance sweep (E1 epoch 100):** w = 0/1/2/3/5 → 26,52 / 22,70 / **16,43** / 18,01 / 26,30 — kurva U (trade-off kualitas–keragaman CFG). Default `sample.guidance_scale` CIFAR-10 diubah 3,0 → **2,0** (dicatat di Bagian H).
+- **DDIM-100 vs DDPM-1000 (2.000 sampel):** FID 26,23 vs 26,64, waktu 8,9 vs 85,7 menit → DDIM valid sebagai sampler evaluasi dan ±10× lebih cepat.
+- **Model terbaik: E1 epoch 100, EMA, w = 2 → FID 16,43.**
+- Visual: grid final `cifar10_final_w2.png`, guidance `s1_guidance_cifar10.png` (dengan nilai FID per panel) & `guidance_mnist.png`, GIF `denoise_cifar10.gif` & `denoise_mnist.gif`, progres `progress_cifar10_e1.png` & `progress_mnist.png`, grafik `fid_experiments_epoch30.png` & `fid_guidance_e1.png`.

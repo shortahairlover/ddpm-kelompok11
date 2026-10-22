@@ -1,0 +1,13 @@
+waktu,label,ckpt,epoch,guidance,sampler,steps,num_samples,fid,durasi_menit
+2026-10-23 01:38,E1,runs/e1_baseline_20261022-160411/checkpoints/epoch_030.pt,30,3.0,ddim,100,5000,31.00,22.4
+2026-10-23 02:00,E2,runs/e2_lr1e-4_20261022-195220/checkpoints/epoch_030.pt,30,3.0,ddim,100,5000,34.08,22.0
+2026-10-23 02:22,E3,runs/e3_lr4e-4_20261022-210211/checkpoints/epoch_030.pt,30,3.0,ddim,100,5000,35.00,22.2
+2026-10-23 02:45,E4,runs/e4_batch64_20261022-221402/checkpoints/epoch_030.pt,30,3.0,ddim,100,5000,23.37,22.0
+2026-10-23 03:07,E5,runs/e5_cosine_20261022-233324/checkpoints/epoch_030.pt,30,3.0,ddim,100,5000,45.26,22.1
+2026-10-23 03:27,E1,runs/e1_baseline_20261022-160411/checkpoints/epoch_100.pt,100,0.0,ddim,100,5000,26.52,7.8
+2026-10-23 03:35,E1,runs/e1_baseline_20261022-160411/checkpoints/epoch_100.pt,100,1.0,ddim,100,5000,22.70,7.8
+2026-10-23 03:57,E1,runs/e1_baseline_20261022-160411/checkpoints/epoch_100.pt,100,2.0,ddim,100,5000,16.43,22.0
+2026-10-23 04:18,E1,runs/e1_baseline_20261022-160411/checkpoints/epoch_100.pt,100,3.0,ddim,100,5000,18.01,22.0
+2026-10-23 04:40,E1,runs/e1_baseline_20261022-160411/checkpoints/epoch_100.pt,100,5.0,ddim,100,5000,26.30,22.0
+2026-10-23 05:02,E1,runs/e1_baseline_20261022-160411/checkpoints/epoch_100.pt,100,3.0,ddim,100,2000,26.23,8.9
+2026-10-23 06:40,E1,runs/e1_baseline_20261022-160411/checkpoints/epoch_100.pt,100,3.0,ddpm,1000,2000,26.64,85.7

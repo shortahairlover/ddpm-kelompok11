@@ -41,7 +41,7 @@ train:
   ckpt_every: 5
 
 sample:
-  guidance_scale: 3.0
+  guidance_scale: 2.0     # terbaik menurut FID (reports/eksperimen.md); training E1-E5 memakai 3.0
   n_per_class: 8
 
 eval:

@@ -43,3 +43,8 @@
 
 **Temuan 4 — Sisa kode tidak berguna**
 - Saat menulis `make_gif.py` sempat tertinggal baris `noise_start = ... if False else None  # noqa: F841` (tidak pernah dipakai, disembunyikan dari lint dengan `noqa`). Dihapus sebelum commit — `noqa` tidak boleh dipakai untuk menyembunyikan kode mati.
+
+**Temuan 5 — Path absolut di `reports/fid_results.csv`**
+- **Gejala:** baris FID pertama menyimpan `D:/Files Mata Kuliah/.../runs/e1_baseline_.../epoch_030.pt` (tidak portabel, membocorkan struktur folder pribadi ke repo).
+- **Solusi:** fungsi `display_path` (path relatif terhadap root repo) + `tests/test_evaluate.py`. Perubahan dibuat kecil dan diuji di CPU karena tahap rantai FID berikutnya memuat ulang `src/evaluate.py`. Baris dari tahap yang sudah berjalan dinormalkan setelah rantai selesai.
+- **Hasil FID pertama:** E1 epoch 30, w = 3, DDIM-100, 5.000 sampel → **FID 31,00** (22,4 menit; statistik 50.000 gambar asli ±12 menit).

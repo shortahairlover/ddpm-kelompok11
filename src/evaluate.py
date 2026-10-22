@@ -89,6 +89,14 @@ def generate_samples(model, diffusion, cfg: Config, device: torch.device, num_sa
         on_batch(images.float())
 
 
+def display_path(path: Path) -> str:
+    """Path relatif terhadap root repo (portabel di CSV); path di luar repo dibiarkan."""
+    try:
+        return path.resolve().relative_to(ROOT).as_posix()
+    except ValueError:
+        return path.as_posix()
+
+
 def append_csv(path: Path, row: dict) -> None:
     new = not path.exists()
     path.parent.mkdir(parents=True, exist_ok=True)
@@ -141,7 +149,7 @@ def main(argv: list[str] | None = None) -> list[dict]:
             score = float(fid.compute())
             minutes = (time.perf_counter() - t0) / 60
             row = {"waktu": datetime.now().strftime("%Y-%m-%d %H:%M"), "label": label,
-                   "ckpt": ckpt.as_posix(), "epoch": info["epoch"], "guidance": w,
+                   "ckpt": display_path(ckpt), "epoch": info["epoch"], "guidance": w,
                    "sampler": args.sampler, "steps": steps, "num_samples": n,
                    "fid": f"{score:.2f}", "durasi_menit": f"{minutes:.1f}"}
             append_csv(args.out, row)

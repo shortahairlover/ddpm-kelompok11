@@ -1,0 +1,49 @@
+# Konfigurasi sanity run MNIST (Fase 4). Semua hyperparameter proyek berasal dari file YAML.
+name: mnist
+seed: 42
+
+data:
+  dataset: mnist          # mnist | cifar10
+  root: data              # folder unduhan torchvision (tidak di-commit)
+  image_size: 32          # MNIST 28x28 di-pad 2 px -> 32x32
+  channels: 1
+  num_classes: 10
+  hflip: false            # angka tidak boleh di-flip
+  batch_size: 128
+  num_workers: 2
+  debug_subset: 512       # jumlah gambar saat --debug
+
+diffusion:
+  timesteps: 1000
+  schedule: linear        # linear | cosine
+  beta_start: 1.0e-4
+  beta_end: 0.02
+  p_uncond: 0.1           # peluang label diganti token null (classifier-free guidance)
+
+model:
+  base_channels: 32
+  channel_mults: [1, 2, 2]     # resolusi 32 -> 16 -> 8
+  num_res_blocks: 2
+  attn_resolutions: [16]
+  dropout: 0.0
+  norm_groups: 8
+
+train:
+  epochs: 20
+  lr: 2.0e-4
+  weight_decay: 0.0
+  warmup_steps: 500
+  grad_clip: 1.0
+  ema_decay: 0.999
+  amp: true
+  log_every: 50           # step
+  sample_every: 5         # epoch
+  ckpt_every: 5           # epoch
+
+sample:
+  guidance_scale: 2.0
+  n_per_class: 8
+
+eval:
+  fid_num_samples: 5000
+  fid_batch_size: 250

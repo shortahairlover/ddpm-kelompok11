@@ -1,0 +1,49 @@
+# Konfigurasi utama CIFAR-10 (baseline E1, Fase 5).
+name: cifar10
+seed: 42
+
+data:
+  dataset: cifar10
+  root: data
+  image_size: 32
+  channels: 3
+  num_classes: 10
+  hflip: true
+  batch_size: 128
+  num_workers: 2
+  debug_subset: 512
+
+diffusion:
+  timesteps: 1000
+  schedule: linear
+  beta_start: 1.0e-4
+  beta_end: 0.02
+  p_uncond: 0.1
+
+model:
+  base_channels: 64
+  channel_mults: [1, 2, 2, 2]  # resolusi 32 -> 16 -> 8 -> 4
+  num_res_blocks: 2
+  attn_resolutions: [16]
+  dropout: 0.1
+  norm_groups: 32
+
+train:
+  epochs: 100
+  lr: 2.0e-4
+  weight_decay: 0.0
+  warmup_steps: 1000
+  grad_clip: 1.0
+  ema_decay: 0.9999
+  amp: true
+  log_every: 100
+  sample_every: 10
+  ckpt_every: 5
+
+sample:
+  guidance_scale: 3.0
+  n_per_class: 8
+
+eval:
+  fid_num_samples: 5000
+  fid_batch_size: 250

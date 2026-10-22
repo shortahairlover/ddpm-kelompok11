@@ -225,19 +225,19 @@ ddpm-kelompok11/
 **Tujuan:** semua komponen DDPM jalan dan terbukti bisa belajar.
 **Branch:** `fase-3-model-diffusion`
 
-- [ ] **T3.1** `src/schedule.py`: schedule linear & cosine, hitung `betas`, `alphas`, `alphas_cumprod`, `alphas_cumprod_prev`, `sqrt_alphas_cumprod`, `sqrt_one_minus_alphas_cumprod`, `posterior_variance`. Fungsi bantu `extract(a, t, shape)`.
-- [ ] **T3.2** `src/diffusion.py`: `q_sample(x0, t, noise)` (forward process).
-- [ ] **T3.3** `scripts/visualize_forward.py`: satu gambar pada t = 0, 100, 250, 500, 750, 999 → `reports/figures/forward_*.png`.
-- [ ] **T3.4** `src/model.py`: sinusoidal timestep embedding + MLP.
-- [ ] **T3.5** Class embedding dengan token null (indeks 10), digabung dengan embedding waktu.
-- [ ] **T3.6** ResBlock (GroupNorm → SiLU → Conv, injeksi embedding, dropout, skip 1×1 bila channel berubah).
-- [ ] **T3.7** Self-attention block (dipakai di resolusi 16×16).
-- [ ] **T3.8** U-Net lengkap (down, middle, up, skip connection) yang dikonfigurasi dari YAML. Print jumlah parameter.
-- [ ] **T3.9** `diffusion.py`: `training_loss(model, x0, y)`: sampling t acak, noise, label dropout, MSE.
-- [ ] **T3.10** `diffusion.py`: `p_sample` + `sample_loop` DDPM dengan CFG (`w`), clamp akhir ke [-1, 1], opsi menyimpan intermediate untuk GIF.
-- [ ] **T3.11** `src/ema.py`: kelas EMA (update, copy ke model, state_dict).
-- [ ] **T3.12** `tests/`: schedule (monoton, rentang benar), `q_sample` (t = 0 ≈ x0, t = T−1 ≈ noise), embedding (shape), U-Net (output shape = input shape untuk MNIST & CIFAR config).
-- [ ] **T3.13** **Tes overfit 1 batch**: 1 batch kecil, ratusan step → loss turun jauh. Simpan grafiknya.
+- [x] **T3.1** `src/schedule.py`: schedule linear & cosine, hitung `betas`, `alphas`, `alphas_cumprod`, `alphas_cumprod_prev`, `sqrt_alphas_cumprod`, `sqrt_one_minus_alphas_cumprod`, `posterior_variance`. Fungsi bantu `extract(a, t, shape)`.
+- [x] **T3.2** `src/diffusion.py`: `q_sample(x0, t, noise)` (forward process).
+- [x] **T3.3** `scripts/visualize_forward.py`: satu gambar pada t = 0, 100, 250, 500, 750, 999 → `reports/figures/forward_*.png`.
+- [x] **T3.4** `src/model.py`: sinusoidal timestep embedding + MLP.
+- [x] **T3.5** Class embedding dengan token null (indeks 10), digabung dengan embedding waktu.
+- [x] **T3.6** ResBlock (GroupNorm → SiLU → Conv, injeksi embedding, dropout, skip 1×1 bila channel berubah).
+- [x] **T3.7** Self-attention block (dipakai di resolusi 16×16).
+- [x] **T3.8** U-Net lengkap (down, middle, up, skip connection) yang dikonfigurasi dari YAML. Print jumlah parameter.
+- [x] **T3.9** `diffusion.py`: `training_loss(model, x0, y)`: sampling t acak, noise, label dropout, MSE.
+- [x] **T3.10** `diffusion.py`: `p_sample` + `sample_loop` DDPM dengan CFG (`w`), clamp akhir ke [-1, 1], opsi menyimpan intermediate untuk GIF.
+- [x] **T3.11** `src/ema.py`: kelas EMA (update, copy ke model, state_dict).
+- [x] **T3.12** `tests/`: schedule (monoton, rentang benar), `q_sample` (t = 0 ≈ x0, t = T−1 ≈ noise), embedding (shape), U-Net (output shape = input shape untuk MNIST & CIFAR config).
+- [x] **T3.13** **Tes overfit 1 batch**: 1 batch kecil, ratusan step → loss turun jauh. Simpan grafiknya.
 
 **Selesai kalau:** semua test lolos dan tes overfit menunjukkan loss turun konsisten.
 

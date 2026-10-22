@@ -209,12 +209,12 @@ ddpm-kelompok11/
 **Branch:** `fase-2-data-pipeline`
 
 - [x] **T2.1** `src/data.py`: transform MNIST (`ToTensor` → `Pad(2)` → [-1, 1]) dan CIFAR-10 (`RandomHorizontalFlip` → `ToTensor` → [-1, 1]).
-- [ ] **T2.2** `get_dataset(cfg)` memakai `torchvision.datasets.MNIST` / `CIFAR10` dengan `root="data"` dan `download=True` (unduhan otomatis: MNIST ±12 MB, CIFAR-10 ±170 MB). Kalau gagal, unduh manual `cifar-10-python.tar.gz` dari situs resmi CIFAR ke `data/`.
+- [x] **T2.2** `get_dataset(cfg)` memakai `torchvision.datasets.MNIST` / `CIFAR10` dengan `root="data"` dan `download=True` (unduhan otomatis: MNIST ±12 MB, CIFAR-10 ±170 MB). Kalau gagal, unduh manual `cifar-10-python.tar.gz` dari situs resmi CIFAR ke `data/`.
 - [x] **T2.3** `get_dataloader(cfg)`: batch size, shuffle, `num_workers`, `pin_memory`, `drop_last` dari config. Pastikan aman di Windows (guard `if __name__ == "__main__":` di skrip pemanggil).
 - [x] **T2.4** Mode debug: subset kecil (misal 512 gambar) lewat flag config/CLI.
 - [x] **T2.5** `denormalize()` ([-1, 1] → [0, 1]) untuk menyimpan gambar.
-- [ ] **T2.6** `scripts/show_batch.py`: simpan grid 1 batch per dataset ke `reports/figures/`, print shape, dtype, min/max, dan distribusi label.
-- [ ] **T2.7** `tests/test_data.py`: assert shape `(B, C, 32, 32)`, C = 1 (MNIST) / 3 (CIFAR), nilai di [-1, 1], label 0–9.
+- [x] **T2.6** `scripts/show_batch.py`: simpan grid 1 batch per dataset ke `reports/figures/`, print shape, dtype, min/max, dan distribusi label.
+- [x] **T2.7** `tests/test_data.py`: assert shape `(B, C, 32, 32)`, C = 1 (MNIST) / 3 (CIFAR), nilai di [-1, 1], label 0–9.
 
 **Output:** `src/data.py`, `scripts/show_batch.py`, `reports/figures/batch_mnist.png`, `reports/figures/batch_cifar10.png`.
 **Selesai kalau:** test data lolos dan kedua grid terlihat benar.

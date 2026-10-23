@@ -308,8 +308,8 @@ ddpm-kelompok11/
 **Tujuan:** memenuhi rubrik Log Interaksi (25%) dan Vibe Coding (30%). Fase ini **berjalan terus sejak Fase 0**, bukan hanya di akhir.
 **Branch:** log per task/bug di-commit di branch fase masing-masing; finalisasi dokumen (T7.4–T7.8) di branch `fase-7-dokumentasi`.
 
-- [ ] **T7.1** Setiap task/modul selesai → buat `logs/interaksi/NN_<modul>.md` sesuai template: tanggal, target modul, rujukan transkrip, Tahap Inisiasi (prompt kelompok apa adanya, alasan, ringkasan output/cuplikan kode penting).
-- [ ] **T7.2** Setiap bug penting → bagian Tahap Debugging: pesan error utuh, prompt perbaikan dari kelompok, analisis & solusi, pelajaran.
+- [x] **T7.1** Setiap task/modul selesai → buat `logs/interaksi/NN_<modul>.md` sesuai template: tanggal, target modul, rujukan transkrip, Tahap Inisiasi (prompt kelompok apa adanya, alasan, ringkasan output/cuplikan kode penting).
+- [x] **T7.2** Setiap bug penting → bagian Tahap Debugging: pesan error utuh, prompt perbaikan dari kelompok, analisis & solusi, pelajaran.
 - [x] **T7.3** Ekspor transkrip sesi Claude ke `logs/raw/` di akhir setiap sesi kerja.
 - [x] **T7.4** `logs/README.md`: indeks kronologis semua log (inisiasi → error → optimasi).
 - [x] **T7.5** Perbarui `README.md` final: setup, cara training, sampling, evaluasi, contoh hasil.

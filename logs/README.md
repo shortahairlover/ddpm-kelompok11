@@ -21,7 +21,7 @@ Rekam jejak kolaborasi dengan **Claude Code (Opus 5.5)** selama Proyek 1 (Mini D
 | 05 | 22–23/10/2026 | [Fase 5 — CIFAR-10 & eksperimen](interaksi/05_fase5_cifar10_eksperimen.md) | Benchmark, E1 100 epoch, E2–E5, S1, S2 | Skrip PowerShell: UTF-16 & risiko berhenti karena stderr | E1 loss 0,0302; perbandingan lr/batch/schedule |
 | 06 | 23/10/2026 | [Fase 6 — Evaluasi](interaksi/06_fase6_evaluasi.md) | FID, sampler DDIM, GIF, grid progres | FID DDPM terlalu lama → DDIM (+ bukti setara); VRAM penuh; path absolut di CSV | **FID terbaik 16,43** (E1 ep 100, w = 2) |
 | 07 | 23/10/2026 | [Fase 7 — Dokumentasi](interaksi/07_fase7_dokumentasi.md) | Transkrip, README, laporan, slide, demo | Konverter transkrip: label prompt salah & pesan Claude hilang | Dokumentasi lengkap + demo 2,5 detik |
-| 08 | 23/10/2026 | [Fase 8 — Finalisasi](interaksi/08_fase8_finalisasi.md) | Uji reproduksi dari clone bersih | (lihat log) | Push final ke `main` |
+| 08 | 23/10/2026 | Fase 8 — Finalisasi (log dibuat di Fase 8) | Uji reproduksi dari clone bersih | — | Push final ke `main` |
 
 ## Transkrip lengkap
 | Berkas | Cakupan |

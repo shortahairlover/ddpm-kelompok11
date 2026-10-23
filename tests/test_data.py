@@ -58,7 +58,9 @@ def test_mnist_padding_keeps_border_black():
 
 def test_hflip_only_for_cifar_train():
     mnist, cifar = _cfg("mnist"), _cfg("cifar10")
-    names = lambda t: [type(s).__name__ for s in t.transforms]  # noqa: E731
+    def names(transform):
+        return [type(s).__name__ for s in transform.transforms]
+
     assert "RandomHorizontalFlip" not in names(build_transform(mnist.data, train=True))
     assert "RandomHorizontalFlip" in names(build_transform(cifar.data, train=True))
     assert "RandomHorizontalFlip" not in names(build_transform(cifar.data, train=False))

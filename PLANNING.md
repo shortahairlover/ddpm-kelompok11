@@ -340,8 +340,8 @@ ddpm-kelompok11/
 **Tujuan:** proyek bisa dijalankan ulang dan siap dikumpulkan.
 **Branch:** `fase-8-finalisasi`
 
-- [ ] **T8.1** Uji reproduksi: clone bersih → setup venv dari `requirements.txt` → jalankan `pytest` + `--debug` training + sampling dari checkpoint.
-- [ ] **T8.2** Bersihkan repo: tidak ada file besar/rahasia, `.gitignore` benar, kode tanpa sisa debug.
+- [x] **T8.1** Uji reproduksi: clone bersih → setup venv dari `requirements.txt` → jalankan `pytest` + `--debug` training + sampling dari checkpoint.
+- [x] **T8.2** Bersihkan repo: tidak ada file besar/rahasia, `.gitignore` benar, kode tanpa sisa debug.
 - [ ] **T8.3** Pastikan semua task di dokumen ini tercentang atau diberi alasan kalau dilewati.
 - [ ] **T8.4** Audit akhir menyeluruh (Bagian I.3 untuk seluruh repo) → push → PR → merge ke `main`. Pastikan `main` berisi semua fase.
 - [ ] **T8.5** Siapkan checkpoint terbaik untuk dibagikan terpisah (Google Drive), karena file `.pt` tidak di-commit.
@@ -379,6 +379,7 @@ ddpm-kelompok11/
 | 23/10/2026 | Checkpoint terbaik sementara = E1 epoch 100; dikonfirmasi dengan FID di T6.2 | Kriteria Fase 5 meminta checkpoint terbaik, sedangkan FID baru dihitung di Fase 6. E1 satu-satunya run 100 epoch; E2–E4 setara E1 pada epoch 30 secara loss & visual |
 | 23/10/2026 | FID dihitung dengan sampler **DDIM 100 langkah** (eta 0), 5.000 sampel, real = 50.000 gambar train CIFAR-10; pembanding DDPM-1000 vs DDIM-100 pada 2.000 sampel | DDPM-1000 untuk 5.000 sampel ±2,3 jam per evaluasi (±20 jam untuk semua evaluasi). DDIM dipakai tanpa training ulang; kesetaraannya dengan DDPM diuji (`test_ddim_eta1_full_steps_equals_ddpm`) |
 | 23/10/2026 | Model terbaik = E1 epoch 100 + w = 2 (FID 16,43); `sample.guidance_scale` CIFAR-10 diubah 3,0 → 2,0 | Hasil guidance sweep FID: w = 0/1/2/3/5 → 26,52/22,70/16,43/18,01/26,30 |
+| 23/10/2026 | Checkpoint terbaik dibagikan lewat **GitHub Release `v1.0`** repo private (bukan Google Drive) | Bisa dikerjakan tanpa akun pribadi anggota; hanya anggota repo yang dapat mengunduh |
 
 ---
 

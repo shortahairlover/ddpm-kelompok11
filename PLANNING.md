@@ -325,7 +325,7 @@ ddpm-kelompok11/
   9. Pembagian peran & riwayat integrasi (commit)
   10. Keterbatasan & pengembangan lanjut
   11. Lampiran: daftar Log Interaksi + transkrip
-- [ ] **T7.7** Bahan presentasi: slide (alur, arsitektur, hasil, demo) + daftar pertanyaan latihan beserta jawabannya, misalnya:
+- [x] **T7.7** Bahan presentasi: slide (alur, arsitektur, hasil, demo) + daftar pertanyaan latihan beserta jawabannya, misalnya:
   - Kenapa normalisasi [-1, 1]?
   - Kenapa model memprediksi noise, bukan gambar?
   - Apa fungsi timestep embedding?

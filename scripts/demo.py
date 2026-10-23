@@ -99,7 +99,7 @@ def main(argv: list[str] | None = None) -> Path:
     print(f"selesai {time.perf_counter() - t0:.1f}s -> {out.relative_to(ROOT)}")
     print("setiap baris = satu kelas (urutan sesuai --kelas)")
     if not args.no_open and sys.platform == "win32":
-        os.startfile(out)  # noqa: S606 - buka gambar untuk demo
+        os.startfile(out)  # buka gambar untuk demo
     return out
 
 

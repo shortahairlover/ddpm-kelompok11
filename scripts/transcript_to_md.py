@@ -113,13 +113,29 @@ def convert(jsonl: Path, result_limit: int = 1500) -> str:
     return "\n".join(lines) + "\n"
 
 
+def redact_terms(md: str, terms: list[str]) -> tuple[str, int]:
+    """Ganti setiap istilah (nama/NIM, tidak peka huruf besar-kecil, utuh per kata)."""
+    total = 0
+    for term in sorted({t.strip() for t in terms if t.strip()}, key=len, reverse=True):
+        pattern = re.compile(r"(?<!\w)" + re.escape(term) + r"(?!\w)", re.IGNORECASE)
+        md, n = pattern.subn("[DISENSOR]", md)
+        total += n
+    return md, total
+
+
 def main(argv: list[str] | None = None) -> Path:
     parser = argparse.ArgumentParser(description="Konversi transkrip JSONL ke Markdown")
     parser.add_argument("jsonl", type=Path)
     parser.add_argument("--out", type=Path, required=True)
     parser.add_argument("--result-limit", type=int, default=1500)
+    parser.add_argument("--redact-file", type=Path,
+                        help="berkas teks (di LUAR repo) berisi nama/NIM yang wajib disensor, "
+                             "satu per baris")
     args = parser.parse_args(argv)
     md = convert(args.jsonl, args.result_limit)
+    if args.redact_file:
+        md, n = redact_terms(md, args.redact_file.read_text(encoding="utf8").splitlines())
+        print(f"istilah disensor: {n} kemunculan")
     args.out.parent.mkdir(parents=True, exist_ok=True)
     args.out.write_text(md, encoding="utf8")
     print(f"transkrip Markdown: {args.out} ({len(md) / 1024:.0f} KB)")

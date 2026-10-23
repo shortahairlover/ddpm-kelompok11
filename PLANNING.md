@@ -340,12 +340,12 @@ ddpm-kelompok11/
 **Tujuan:** proyek bisa dijalankan ulang dan siap dikumpulkan.
 **Branch:** `fase-8-finalisasi`
 
-- [ ] **T8.1** Uji reproduksi: clone bersih → setup venv dari `requirements.txt` → jalankan `pytest` + `--debug` training + sampling dari checkpoint.
-- [ ] **T8.2** Bersihkan repo: tidak ada file besar/rahasia, `.gitignore` benar, kode tanpa sisa debug.
-- [ ] **T8.3** Pastikan semua task di dokumen ini tercentang atau diberi alasan kalau dilewati.
-- [ ] **T8.4** Audit akhir menyeluruh (Bagian I.3 untuk seluruh repo) → push → PR → merge ke `main`. Pastikan `main` berisi semua fase.
-- [ ] **T8.5** Siapkan checkpoint terbaik untuk dibagikan terpisah (Google Drive), karena file `.pt` tidak di-commit.
-- [ ] **T8.6** Pengingat untuk kelompok (dikerjakan kelompok sendiri):
+- [x] **T8.1** Uji reproduksi: clone bersih → setup venv dari `requirements.txt` → jalankan `pytest` + `--debug` training + sampling dari checkpoint.
+- [x] **T8.2** Bersihkan repo: tidak ada file besar/rahasia, `.gitignore` benar, kode tanpa sisa debug.
+- [x] **T8.3** Pastikan semua task di dokumen ini tercentang atau diberi alasan kalau dilewati.
+- [x] **T8.4** Audit akhir menyeluruh (Bagian I.3 untuk seluruh repo) → push → PR → merge ke `main`. Pastikan `main` berisi semua fase.
+- [x] **T8.5** Siapkan checkpoint terbaik untuk dibagikan terpisah (Google Drive), karena file `.pt` tidak di-commit.
+- [x] **T8.6** Pengingat untuk kelompok (dikerjakan kelompok sendiri):
   - isi kolom Project 1 di Daftar Kelompok (Algoritma: *Mini DDPM class-conditional, MNIST & CIFAR-10*);
   - perbaiki NIM Akhdan menjadi 103012300148;
   - kumpulkan laporan sesuai instruksi dosen.
@@ -353,14 +353,14 @@ ddpm-kelompok11/
 ---
 
 ## Checklist Deliverable Akhir
-- [ ] Repo GitHub rapi dengan riwayat commit per task
-- [ ] `CLAUDE.md` (system prompt awal) + `PLANNING.md`
-- [ ] Kode modular + test + README
-- [ ] Grafik loss MNIST & CIFAR-10, tabel eksperimen, FID
-- [ ] Grid per kelas, grid guidance, grid progres, GIF denoising
-- [ ] Log Interaksi lengkap + transkrip
-- [ ] Laporan akhir (PDF)
-- [ ] Slide presentasi + skrip demo
+- [x] Repo GitHub rapi dengan riwayat commit per task
+- [x] `CLAUDE.md` (system prompt awal) + `PLANNING.md`
+- [x] Kode modular + test + README
+- [x] Grafik loss MNIST & CIFAR-10, tabel eksperimen, FID
+- [x] Grid per kelas, grid guidance, grid progres, GIF denoising
+- [x] Log Interaksi lengkap + transkrip
+- [x] Laporan akhir (PDF)
+- [x] Slide presentasi + skrip demo
 
 ---
 
@@ -379,6 +379,7 @@ ddpm-kelompok11/
 | 23/10/2026 | Checkpoint terbaik sementara = E1 epoch 100; dikonfirmasi dengan FID di T6.2 | Kriteria Fase 5 meminta checkpoint terbaik, sedangkan FID baru dihitung di Fase 6. E1 satu-satunya run 100 epoch; E2–E4 setara E1 pada epoch 30 secara loss & visual |
 | 23/10/2026 | FID dihitung dengan sampler **DDIM 100 langkah** (eta 0), 5.000 sampel, real = 50.000 gambar train CIFAR-10; pembanding DDPM-1000 vs DDIM-100 pada 2.000 sampel | DDPM-1000 untuk 5.000 sampel ±2,3 jam per evaluasi (±20 jam untuk semua evaluasi). DDIM dipakai tanpa training ulang; kesetaraannya dengan DDPM diuji (`test_ddim_eta1_full_steps_equals_ddpm`) |
 | 23/10/2026 | Model terbaik = E1 epoch 100 + w = 2 (FID 16,43); `sample.guidance_scale` CIFAR-10 diubah 3,0 → 2,0 | Hasil guidance sweep FID: w = 0/1/2/3/5 → 26,52/22,70/16,43/18,01/26,30 |
+| 23/10/2026 | Checkpoint terbaik dibagikan lewat **GitHub Release `v1.0`** repo private (bukan Google Drive) | Bisa dikerjakan tanpa akun pribadi anggota; hanya anggota repo yang dapat mengunduh |
 
 ---
 
@@ -422,8 +423,8 @@ Claude berhenti dan melapor ke kelompok **hanya** kalau:
 Setelah kondisi teratasi, Claude melanjutkan dari task terakhir yang belum tercentang.
 
 ### I.5 Prasyarat sebelum perintah "mulai" (dikerjakan kelompok)
-- [ ] Laptop bisa mengakses github.com (cek di browser).
-- [ ] Siap login GitHub saat T0.4 (akun yang akan memiliki repo).
-- [ ] Nama & email untuk identitas Git sudah diberikan ke Claude.
-- [ ] Laptop dicolok ke listrik, mode sleep/hibernate dimatikan selama proyek berjalan (Settings → System → Power).
-- [ ] Mode izin Claude Code memperbolehkan menjalankan perintah tanpa konfirmasi satu per satu (supaya benar-benar tanpa berhenti).
+- [x] Laptop bisa mengakses github.com (cek di browser).
+- [x] Siap login GitHub saat T0.4 (akun yang akan memiliki repo).
+- [x] Nama & email untuk identitas Git sudah diberikan ke Claude.
+- [x] Laptop dicolok ke listrik, mode sleep/hibernate dimatikan selama proyek berjalan (Settings → System → Power).
+- [x] Mode izin Claude Code memperbolehkan menjalankan perintah tanpa konfirmasi satu per satu (supaya benar-benar tanpa berhenti).

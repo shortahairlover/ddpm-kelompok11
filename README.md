@@ -46,6 +46,18 @@ python scripts/check_env.py         # harus berakhir dengan "SEMUA CEK LOLOS"
 
 MNIST (±12 MB) dan CIFAR-10 (±170 MB) diunduh otomatis ke `data/` saat pertama kali dipakai.
 
+> **Windows:** clone ke folder dengan path pendek (misal `D:\proyek\ddpm-kelompok11`). Path yang terlalu dalam membuat `pip install` gagal dengan `OSError: [WinError 206] The filename or extension is too long` karena batas 260 karakter (MAX_PATH) — ditemukan saat uji reproduksi Fase 8.
+
+### Checkpoint terbaik
+Checkpoint tidak di-commit (ukuran besar). Unduh dari halaman **Releases** repo ini (rilis `v1.0`):
+
+| Berkas | Isi | Letakkan di |
+|---|---|---|
+| `cifar10_e1_epoch100.pt` (±69 MB) | E1 baseline epoch 100, bobot model + EMA (FID 16,43 dengan w = 2) | `runs/e1_baseline_20261022-160411/checkpoints/epoch_100.pt` |
+| `mnist_epoch020.pt` (±13 MB) | MNIST sanity run epoch 20 | `runs/mnist_sanity_20261022-152956/checkpoints/epoch_020.pt` |
+
+Dengan path tersebut, `python -m scripts.demo` langsung menemukan checkpoint-nya; atau pakai `--ckpt <path>` di mana pun berkas disimpan.
+
 ## Cara menjalankan
 
 Semua perintah dijalankan dari root repo dengan venv aktif.
@@ -68,7 +80,7 @@ Semua perintah dijalankan dari root repo dengan venv aktif.
 
 Setiap run tersimpan di `runs/<nama>_<waktu>/`: `config.yaml`, `train.log`, `metrics.csv`, `steps.csv`, `tensorboard/`, `samples/`, `checkpoints/` (`epoch_XXX.pt` + `last.pt`). Lihat kurva dengan `tensorboard --logdir runs`.
 
-> Checkpoint tidak di-commit (ukuran besar). Checkpoint terbaik (`e1_baseline .../epoch_100.pt`, MNIST `.../epoch_020.pt`) dibagikan terpisah.
+> Checkpoint terbaik tersedia di Releases (lihat bagian *Checkpoint terbaik* di atas).
 
 ## Struktur
 

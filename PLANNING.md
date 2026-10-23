@@ -343,7 +343,7 @@ ddpm-kelompok11/
 - [x] **T8.1** Uji reproduksi: clone bersih → setup venv dari `requirements.txt` → jalankan `pytest` + `--debug` training + sampling dari checkpoint.
 - [x] **T8.2** Bersihkan repo: tidak ada file besar/rahasia, `.gitignore` benar, kode tanpa sisa debug.
 - [x] **T8.3** Pastikan semua task di dokumen ini tercentang atau diberi alasan kalau dilewati.
-- [ ] **T8.4** Audit akhir menyeluruh (Bagian I.3 untuk seluruh repo) → push → PR → merge ke `main`. Pastikan `main` berisi semua fase.
+- [x] **T8.4** Audit akhir menyeluruh (Bagian I.3 untuk seluruh repo) → push → PR → merge ke `main`. Pastikan `main` berisi semua fase.
 - [x] **T8.5** Siapkan checkpoint terbaik untuk dibagikan terpisah (Google Drive), karena file `.pt` tidak di-commit.
 - [x] **T8.6** Pengingat untuk kelompok (dikerjakan kelompok sendiri):
   - isi kolom Project 1 di Daftar Kelompok (Algoritma: *Mini DDPM class-conditional, MNIST & CIFAR-10*);

@@ -43,3 +43,13 @@ def test_convert_labels_redacts_and_keeps_claude(tmp_path):
     assert "notifikasi sistem" in md
     assert "pesan saat bekerja" in md
     assert md.count("## Kelompok") == 2
+
+
+def test_redact_terms_whole_word_case_insensitive():
+    from scripts.transcript_to_md import redact_terms
+
+    md = "grep 'Budi Santoso|1234567890' oleh budi santoso; Budiman tetap; 12345678901 tetap"
+    out, n = redact_terms(md, ["Budi Santoso", "1234567890", ""])
+    assert n == 3
+    assert "Budi Santoso" not in out and "budi santoso" not in out and "1234567890'" not in out
+    assert "Budiman tetap" in out and "12345678901 tetap" in out

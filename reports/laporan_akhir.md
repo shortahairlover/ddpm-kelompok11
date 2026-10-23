@@ -154,7 +154,7 @@ Pembagian peran formal mengikuti panduan (tabel di awal). Atas keputusan kelompo
 
 - **9 branch fase** dan **Pull Request #1–#9** yang masing-masing berisi ringkasan dan hasil audit;
 - commit per task berawalan ID task (`T2.3: ...`) sehingga setiap komponen dapat ditelusuri ke task di `PLANNING.md`;
-- **test regresi** yang menggabungkan seluruh modul (data → model → diffusion → training → sampling → evaluasi): seluruh 74 test lolos di akhir proyek.
+- **test regresi** yang menggabungkan seluruh modul (data → model → diffusion → training → sampling → evaluasi): seluruh 75 test lolos di akhir proyek (juga lolos di clone bersih saat uji reproduksi Fase 8).
 
 ## 10. Keterbatasan & Pengembangan Lanjut
 - Resolusi 32×32 dan model 9 juta parameter → detail halus masih buram; model lebih besar / training lebih lama akan menurunkan FID.

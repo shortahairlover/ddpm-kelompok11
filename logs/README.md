@@ -6,7 +6,7 @@ Rekam jejak kolaborasi dengan **Claude Code (Opus 5.5)** selama Proyek 1 (Mini D
 
 ## Cara membaca
 - `interaksi/` — log terstruktur per fase: prompt kelompok (apa adanya), alasan, output model, eror utuh + analisis + solusi.
-- `raw/` — transkrip lengkap sesi Claude Code (dikonversi dari ekspor sesi dengan `scripts/transcript_to_md.py`; Claude Code tidak menyediakan *share link*). Data mahasiswa kelompok lain yang sempat terbaca dari file Daftar Kelompok disensor.
+- `raw/` — transkrip lengkap sesi Claude Code (dikonversi dari ekspor sesi dengan `scripts/transcript_to_md.py`; Claude Code tidak menyediakan *share link*). Data mahasiswa kelompok lain yang sempat terbaca dari file Daftar Kelompok disensor (output tool pembaca dokumen + daftar nama/NIM yang disimpan di luar repo, opsi `--redact-file`).
 - Bukti audit setiap fase ada di [`../audits/`](../audits/), riwayat kode di Pull Request GitHub per fase.
 
 ## Indeks kronologis
@@ -21,10 +21,10 @@ Rekam jejak kolaborasi dengan **Claude Code (Opus 5.5)** selama Proyek 1 (Mini D
 | 05 | 22–23/10/2026 | [Fase 5 — CIFAR-10 & eksperimen](interaksi/05_fase5_cifar10_eksperimen.md) | Benchmark, E1 100 epoch, E2–E5, S1, S2 | Skrip PowerShell: UTF-16 & risiko berhenti karena stderr | E1 loss 0,0302; perbandingan lr/batch/schedule |
 | 06 | 23/10/2026 | [Fase 6 — Evaluasi](interaksi/06_fase6_evaluasi.md) | FID, sampler DDIM, GIF, grid progres | FID DDPM terlalu lama → DDIM (+ bukti setara); VRAM penuh; path absolut di CSV | **FID terbaik 16,43** (E1 ep 100, w = 2) |
 | 07 | 23/10/2026 | [Fase 7 — Dokumentasi](interaksi/07_fase7_dokumentasi.md) | Transkrip, README, laporan, slide, demo | Konverter transkrip: label prompt salah & pesan Claude hilang | Dokumentasi lengkap + demo 2,5 detik |
-| 08 | 23/10/2026 | Fase 8 — Finalisasi (log dibuat di Fase 8) | Uji reproduksi dari clone bersih | — | Push final ke `main` |
+| 08 | 23/10/2026 | [Fase 8 — Finalisasi](interaksi/08_fase8_finalisasi.md) | Uji reproduksi clone bersih, Release `v1.0` | `WinError 206` (MAX_PATH), junction salah, nama kelompok lain di pola grep transkrip | 74 test lolos di clone bersih; checkpoint terverifikasi checksum |
 
 ## Transkrip lengkap
 | Berkas | Cakupan |
 |---|---|
 | [`raw/sesi_2026-10-22_s.d_2026-10-23_fase0-6.md`](raw/sesi_2026-10-22_s.d_2026-10-23_fase0-6.md) | Pemilihan topik, perencanaan, Fase 0–6 |
-| `raw/sesi_..._final.md` | Seluruh sesi termasuk Fase 7–8 (diekspor di akhir proyek, T8) |
+| [`raw/sesi_2026-10-22_s.d_2026-10-23_final.md`](raw/sesi_2026-10-22_s.d_2026-10-23_final.md) | Seluruh sesi termasuk Fase 7–8 (diekspor di akhir proyek; langkah setelah ekspor tercatat di log Fase 8 dan `audits/fase-8.md`) |

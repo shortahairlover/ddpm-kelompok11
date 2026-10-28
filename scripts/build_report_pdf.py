@@ -30,6 +30,7 @@ body { font-family: 'Segoe UI', Arial, sans-serif; font-size: 10.5pt; line-heigh
 h1 { font-size: 18pt; border-bottom: 2px solid #333; padding-bottom: 4px; }
 h2 { font-size: 14pt; margin-top: 18px; border-bottom: 1px solid #ccc; padding-bottom: 2px; }
 h3 { font-size: 12pt; }
+h1, h2, h3 { page-break-after: avoid; break-after: avoid; }
 table { border-collapse: collapse; margin: 8px 0; font-size: 9.5pt; width: 100%; }
 th, td { border: 1px solid #bbb; padding: 3px 6px; vertical-align: top; }
 th { background: #f0f0f0; }
@@ -39,6 +40,19 @@ pre { background: #f6f6f6; border: 1px solid #ddd; padding: 6px; font-size: 8pt;
 pre code { background: none; padding: 0; }
 img { max-width: 100%; max-height: 120mm; display: block; margin: 6px auto;
       page-break-inside: avoid; }
+.pagebreak { page-break-after: always; }
+.cover { text-align: center; padding-top: 30mm; }
+.cover-kicker { font-size: 12pt; letter-spacing: 2px; color: #b8433f; font-weight: bold; }
+.cover-title { font-size: 24pt; border: none; margin: 10px 0 6px; line-height: 1.25; }
+.cover-sub { font-size: 12pt; color: #444; margin-bottom: 26px; }
+.cover-group { font-size: 15pt; font-weight: bold; margin: 18px 0 8px; }
+.cover table { width: 92%; margin: 8px auto 18px; text-align: left; }
+.cover-links th { width: 30%; }
+.cover a { color: #1a4f8b; word-break: break-all; }
+.log { border: 1px solid #c9ccd8; background: #fafbfd; padding: 4px 12px; margin: 10px 0;
+       page-break-inside: avoid; font-size: 10pt; }
+.log p, .log li { margin: 3px 0; }
+.log ul { margin: 2px 0 4px; }
 """
 
 
@@ -55,7 +69,7 @@ def find_edge() -> Path:
 def markdown_to_html(md_path: Path) -> str:
     """Markdown -> dokumen HTML lengkap; <base> agar path gambar relatif tetap benar."""
     body = markdown.markdown(md_path.read_text(encoding="utf8"),
-                             extensions=["tables", "fenced_code", "sane_lists"])
+                             extensions=["tables", "fenced_code", "sane_lists", "md_in_html"])
     base = md_path.parent.resolve().as_uri() + "/"
     return (f"<!doctype html><html lang='id'><head><meta charset='utf-8'><base href='{base}'>"
             f"<title>{md_path.stem}</title><style>{CSS}</style></head><body>{body}</body></html>")
